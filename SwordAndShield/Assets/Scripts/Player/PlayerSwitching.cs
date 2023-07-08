@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerSwitch : MonoBehaviour
-{
-    public PlayerMovement PlayerMovement;
-    public PlayerMovement player2Movement;
+public class PlayerSwitching : MonoBehaviour
+    {
+    [SerializeField] public ShieldPlayerMovement PlayerMovement;
+    [SerializeField] public SwordPlayerMovement player2Movement;
     [SerializeField] private Transform player1;
     [SerializeField] private Transform player2;
     public bool player1Active = true;
@@ -55,3 +55,4 @@ public class PlayerSwitch : MonoBehaviour
         }
     }
 }
+

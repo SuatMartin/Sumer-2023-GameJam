@@ -2,17 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour
+public class ShieldPlayerMovement : MonoBehaviour
 {
-   [SerializeField] private float speed;
+    [SerializeField] private float speed;
     [SerializeField] private float jumpPower;
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private LayerMask wallLayer;
+    [SerializeField] private float attackCooldown;
+    [SerializeField] private float attackPower;
+    [SerializeField] private float attackDuration;
+    private float cooldownTimer = Mathf.Infinity;
     private Rigidbody2D body;
     private Animator anim;
     private BoxCollider2D boxCollider;
     private float wallJumpCooldown;
     private float horizontalInput;
+    private bool damaging = false;
+    public bool isDashing;
+    private bool canDash = true;
 
     [Header ("Coyote Time")]
     [SerializeField] private float coyoteTime;
@@ -33,8 +40,10 @@ public class PlayerMovement : MonoBehaviour
 
     // Update is called once per frame
     private void Update() {
+        if(isDashing){
+            return;
+        }
         horizontalInput = Input.GetAxis("Horizontal");
-        
         //Flip Player walking
         if(horizontalInput > .01f){
             transform.localScale = new Vector3(4,4,1);
@@ -59,6 +68,9 @@ public class PlayerMovement : MonoBehaviour
             jumpCounter = extraJumps;
         } else {
             coyoteCounter -= Time.deltaTime;
+        }
+         if(Input.GetMouseButton(0) && canDash && canAttack()){
+            StartCoroutine(Attack());
         }
     }
 
@@ -92,5 +104,30 @@ public class PlayerMovement : MonoBehaviour
 
     public bool canAttack(){
         return horizontalInput == 0 && !onWall(); 
+    }
+
+    private IEnumerator Attack(){
+        canDash = false;
+        isDashing = true;
+        damaging = true;
+        float originalGravity = body.gravityScale;
+        body.gravityScale = 0f;
+        body.velocity = new Vector2((transform.localScale.x/4)*attackPower,0f);
+        yield return new WaitForSeconds(attackDuration);
+        body.gravityScale = originalGravity;
+        isDashing = false;
+        damaging = false;
+        yield return new WaitForSeconds(attackCooldown);
+        canDash = true;
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision){
+        if(collision.tag == "Enemy"){
+            if(damaging){
+            collision.GetComponent<Health>().takeDamage(1);
+            } else {
+            boxCollider.GetComponent<Health>().takeDamage(1);
+            }
+        }
     }
 }
