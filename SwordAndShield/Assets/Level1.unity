@@ -501,7 +501,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   coyoteTime: 0.25
-  extraJumps: 2
+  extraJumps: 1
 --- !u!114 &427236527
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -558,7 +558,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!61 &427236530
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1202,6 +1202,7 @@ GameObject:
   - component: {fileID: 751657731}
   - component: {fileID: 751657737}
   - component: {fileID: 751657736}
+  - component: {fileID: 751657738}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -1249,7 +1250,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!61 &751657733
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1364,7 +1365,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   coyoteTime: 0.25
-  extraJumps: 2
+  extraJumps: 1
 --- !u!114 &751657737
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1381,6 +1382,21 @@ MonoBehaviour:
   iFramesDuration: 2
   numberOfFlashes: 3
   components: []
+--- !u!114 &751657738
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 751657730}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af3ca0b29f39e3c4892003f7df864971, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackCooldown: 1
+  attackPower: 3000
+  attackDuration: 0.5
 --- !u!1 &936506091
 GameObject:
   m_ObjectHideFlags: 0
