@@ -69,9 +69,10 @@ public class ShieldPlayerMovement : MonoBehaviour
         } else {
             coyoteCounter -= Time.deltaTime;
         }
-         if(Input.GetMouseButton(0) && canDash && canAttack()){
+         if(Input.GetMouseButton(0) && canDash)  // && canAttack()
+         {
             StartCoroutine(Attack());
-        }
+         }
     }
 
     private void Jump(){

@@ -23,6 +23,9 @@ public class SwordPlayerMovement : MonoBehaviour
     [SerializeField] private int extraJumps;
     private int jumpCounter;
 
+    public Vector2 boxSize;
+    public Transform parryPoint;
+
 
 
     // Start is called before the first frame update
@@ -60,6 +63,11 @@ public class SwordPlayerMovement : MonoBehaviour
         } else {
             coyoteCounter -= Time.deltaTime;
         }
+
+        if (Input.GetMouseButton(0))  // && canAttack()
+        {
+            Parry();
+        }
     }
 
     private void Jump(){
@@ -80,6 +88,28 @@ public class SwordPlayerMovement : MonoBehaviour
             }
         }
 
+    void Parry()
+    {
+        Collider2D[] colliders = Physics2D.OverlapBoxAll(parryPoint.position, boxSize, 0f);
+
+        // Check if any colliders were found
+        if (colliders.Length > 0)
+        {
+            foreach (Collider2D collider in colliders)
+            {
+                // if hit arrow, make arrow flip away
+
+                if (collider.name.Contains("arrow")) // this is placeholder
+                {
+                    print("I HIT AN ARROW");
+                }
+
+                // Do something with the collider, e.g., access its GameObject or apply some logic
+                Debug.Log("Collision detected with: " + collider.gameObject.name);
+            }
+        }
+    }
+
     private bool isGrounded(){
         RaycastHit2D raycastHit = Physics2D.BoxCast(boxCollider.bounds.center, boxCollider.bounds.size, 0, Vector2.down, 0.1f, groundLayer);
         return raycastHit.collider != null;
@@ -92,5 +122,11 @@ public class SwordPlayerMovement : MonoBehaviour
 
     public bool canAttack(){
         return horizontalInput == 0 && !onWall(); 
+    }
+    private void OnDrawGizmos()
+    {
+        // Draw a wireframe box to visualize the collision box in the Scene view
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireCube(parryPoint.position, boxSize);
     }
 }
