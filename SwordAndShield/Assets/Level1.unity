@@ -642,16 +642,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52275fe1f48f2cb49ac608add927988a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0
-  jumpPower: 0
+  speed: 10
+  jumpPower: 20
   groundLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   wallLayer:
     serializedVersion: 2
-    m_Bits: 0
-  coyoteTime: 0
-  extraJumps: 0
+    m_Bits: 128
+  coyoteTime: 0.25
+  extraJumps: 1
 --- !u!1 &488975465
 GameObject:
   m_ObjectHideFlags: 0
@@ -1363,9 +1363,9 @@ MonoBehaviour:
   wallLayer:
     serializedVersion: 2
     m_Bits: 128
-  attackCooldown: 0
-  attackPower: 0
-  attackDuration: 0
+  attackCooldown: 1
+  attackPower: 15
+  attackDuration: 0.15
   isDashing: 0
   coyoteTime: 0.25
   extraJumps: 1
@@ -1755,7 +1755,9 @@ MonoBehaviour:
   player1: {fileID: 751657735}
   player2: {fileID: 427236532}
   player1Active: 1
-  players: []
+  players:
+  - {fileID: 751657730}
+  - {fileID: 427236525}
 --- !u!4 &1391400099
 Transform:
   m_ObjectHideFlags: 0
