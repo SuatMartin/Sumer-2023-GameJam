@@ -27,6 +27,7 @@ public class EnemyMelee_MoveState : MoveState
 
         if(isDetectingWall || isDetectingLedge)
         {
+            Debug.Log("Detected");
             enemy.idleState.SetFlipAfterIdle(true);
             stateMachine.ChangeState(enemy.idleState);
         }

@@ -17,5 +17,8 @@ public class EnemyMelee : Entity
         base.Start();
 
         moveState = new EnemyMelee_MoveState(this, stateMachine, moveStateData, this);
+        idleState = new EnemyMelee_IdleState(this, stateMachine, idleStateData, this);
+
+        stateMachine.Initialize(moveState);
     }
 }

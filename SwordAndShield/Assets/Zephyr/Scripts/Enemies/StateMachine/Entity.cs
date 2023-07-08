@@ -21,6 +21,8 @@ public class Entity : MonoBehaviour
 
     public virtual void Start()
     {
+        facingDirection = 1;
+        
         aliveGO = transform.Find("Alive").gameObject;
         rb = aliveGO.GetComponent<Rigidbody2D>();
 
@@ -49,7 +51,7 @@ public class Entity : MonoBehaviour
     }
     public virtual bool CheckLedge()
     {
-        return Physics2D.Raycast(ledgeCheck.position, Vector2.down, entityData.ledgeCheckDistance, entityData.whatIsGround);
+        return !Physics2D.Raycast(ledgeCheck.position, Vector2.down, entityData.ledgeCheckDistance, entityData.whatIsGround);
     }
 
     public virtual void Flip()
