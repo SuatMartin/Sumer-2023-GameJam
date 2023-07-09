@@ -8,8 +8,8 @@ public class D_Entity : ScriptableObject
     public float wallCheckDistance = 0.2f;
     public float ledgeCheckDistance = 0.4f;
 
-    public float minAgroDistance = 7f;
-    public float maxAgroDistance = 8f;
+    public float minAgroDistance = 100f;
+    public float maxAgroDistance = 110f;
 
     public LayerMask whatIsGround;
     public LayerMask whatIsPlayer;
