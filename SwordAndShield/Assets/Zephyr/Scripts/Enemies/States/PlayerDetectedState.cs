@@ -9,7 +9,7 @@ public class PlayerDetectedState : State
     protected bool isPlayerInMinAgroRange;
     protected bool isPlayerInMaxAgroRange;
     
-    public PlayerDetectedState(Entity entity, FiniteStateMachine stateMachine, D_PlayerDetectedState stateData) : base(entity, stateMachine)
+    public PlayerDetectedState(Entity entity, FiniteStateMachine stateMachine, string animName, D_PlayerDetectedState stateData) : base(entity, stateMachine, animName)
     {
         this.stateData = stateData;
     }

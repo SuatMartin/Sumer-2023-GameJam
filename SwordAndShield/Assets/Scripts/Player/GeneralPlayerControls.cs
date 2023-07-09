@@ -145,7 +145,7 @@ public class GeneralPlayerControls : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            print("JUMP!");
+            //print("JUMP!");
             Jump();
         }
 
@@ -264,7 +264,7 @@ public class GeneralPlayerControls : MonoBehaviour
                 {
                     if (collider.transform.parent.name.Contains("Arrow")) // this is placeholder
                     {
-                        print("I HIT AN ARROW");
+                        //print("I HIT AN ARROW");
 
                         // make arrow flip away
                         collider.transform.parent.gameObject.GetComponent<Projectile>().Flip();
@@ -285,7 +285,7 @@ public class GeneralPlayerControls : MonoBehaviour
 
     void HitByArrow(GameObject arrow)
     {
-        print("arrow!!!!!!");
+        //print("arrow!!!!!!");
         arrow.GetComponent<Projectile>().Kill();
         LoseHealth();
     }
@@ -316,12 +316,12 @@ public class GeneralPlayerControls : MonoBehaviour
 
     private void Jump()
     {
-        print(isGrounded());
+        //print(isGrounded());
         if (coyoteCounter < 0 && jumpCounter <= 0) { return; }
         //SoundManager.instance.PlaySound(jumpSound);
         if (isGrounded())
         {
-            print("I am grounded and jumping");
+            //print("I am grounded and jumping");
 
             if (isSword) anim.Play("JumpSword");
             else anim.Play("JumpShield");
@@ -383,7 +383,7 @@ public class GeneralPlayerControls : MonoBehaviour
 
         if (collision.transform.parent.name.Contains("Arrow"))
         {
-            print("GETTTNIG IT BY ARROW");
+            //print("GETTTNIG IT BY ARROW");
             HitByArrow(collision.transform.parent.gameObject);
         }
 
@@ -391,14 +391,14 @@ public class GeneralPlayerControls : MonoBehaviour
         {
             if (isDashing)
             {
-                print("I dashed into enemy");
+                //print("I dashed into enemy");
                 bash.Play();
                 GameObject blood = Instantiate(bloodPrefab, collision.transform.position, Quaternion.identity);
                 Destroy(collision.transform.parent.gameObject);
             }
             else
             {
-                print("I ran into enemy");
+                //print("I ran into enemy");
                 boxCollider.GetComponent<Health>().takeDamage(1);
             }
         }
@@ -414,7 +414,7 @@ public class GeneralPlayerControls : MonoBehaviour
     IEnumerator DelayBeforeWin()
     {
         yield return new WaitForSeconds(.5f);
-        print("you win!");
+        //print("you win!");
     }
 
     private void OnDrawGizmos()

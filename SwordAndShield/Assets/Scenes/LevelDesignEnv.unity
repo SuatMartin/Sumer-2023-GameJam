@@ -27264,6 +27264,10 @@ PrefabInstance:
       propertyPath: m_Size.y
       value: 0.33
       objectReference: {fileID: 0}
+    - target: {fileID: 3559411073156831383, guid: 6184e6bc3f9e670469be39c6dedf6dd4, type: 3}
+      propertyPath: m_FlipX
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3559411074223880192, guid: 6184e6bc3f9e670469be39c6dedf6dd4, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -27315,9 +27319,56 @@ PrefabInstance:
     - target: {fileID: 3559411074223880195, guid: 6184e6bc3f9e670469be39c6dedf6dd4, type: 3}
       propertyPath: anim
       value: 
-      objectReference: {fileID: 1225536980}
+      objectReference: {fileID: 0}
+    - target: {fileID: 3559411074223880195, guid: 6184e6bc3f9e670469be39c6dedf6dd4, type: 3}
+      propertyPath: arrow
+      value: 
+      objectReference: {fileID: 4334751830841552555, guid: 49080c0590931014481947568f4bce61, type: 3}
+    - target: {fileID: 3559411074223880195, guid: 6184e6bc3f9e670469be39c6dedf6dd4, type: 3}
+      propertyPath: wallCheck
+      value: 
+      objectReference: {fileID: 1449969494}
+    - target: {fileID: 3559411074223880195, guid: 6184e6bc3f9e670469be39c6dedf6dd4, type: 3}
+      propertyPath: entityData
+      value: 
+      objectReference: {fileID: 11400000, guid: c13d604b89e0bdc4b9fd22e5e7008d5d, type: 2}
+    - target: {fileID: 3559411074223880195, guid: 6184e6bc3f9e670469be39c6dedf6dd4, type: 3}
+      propertyPath: ledgeCheck
+      value: 
+      objectReference: {fileID: 1449969493}
+    - target: {fileID: 3559411074223880195, guid: 6184e6bc3f9e670469be39c6dedf6dd4, type: 3}
+      propertyPath: playerCheck
+      value: 
+      objectReference: {fileID: 1449969492}
+    - target: {fileID: 3559411074223880195, guid: 6184e6bc3f9e670469be39c6dedf6dd4, type: 3}
+      propertyPath: idleStateData
+      value: 
+      objectReference: {fileID: 11400000, guid: f7d66394a31da8b4c9abe86573bb6071, type: 2}
+    - target: {fileID: 3559411074223880195, guid: 6184e6bc3f9e670469be39c6dedf6dd4, type: 3}
+      propertyPath: moveStateData
+      value: 
+      objectReference: {fileID: 11400000, guid: 3bed01f71c4da8e429de53f1584f004d, type: 2}
+    - target: {fileID: 3559411074223880195, guid: 6184e6bc3f9e670469be39c6dedf6dd4, type: 3}
+      propertyPath: playerDetectedStateData
+      value: 
+      objectReference: {fileID: 11400000, guid: 4f9b0a05e7f477d48b53fa8d9bbd9356, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6184e6bc3f9e670469be39c6dedf6dd4, type: 3}
+--- !u!4 &1449969492 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3559411073136318377, guid: 6184e6bc3f9e670469be39c6dedf6dd4, type: 3}
+  m_PrefabInstance: {fileID: 1449969491}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1449969493 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3559411073696636661, guid: 6184e6bc3f9e670469be39c6dedf6dd4, type: 3}
+  m_PrefabInstance: {fileID: 1449969491}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1449969494 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3559411072603348581, guid: 6184e6bc3f9e670469be39c6dedf6dd4, type: 3}
+  m_PrefabInstance: {fileID: 1449969491}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1598378870
 GameObject:
   m_ObjectHideFlags: 0
