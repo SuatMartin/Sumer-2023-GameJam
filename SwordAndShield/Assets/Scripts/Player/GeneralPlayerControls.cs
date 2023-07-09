@@ -289,12 +289,12 @@ public class GeneralPlayerControls : MonoBehaviour
                         print("I HIT AN ARROW");
 
                         // make arrow flip away
-                        collider.transform.parent.gameObject.GetComponent<Projectile>().Kill();
-                        parry.Play();
+                        collider.transform.parent.gameObject.GetComponent<Projectile>().Flip();
                     }
                     // Do something with the collider, e.g., access its GameObject or apply some logic
                     //Debug.Log("Collision detected with: " + collider.gameObject.name);
 
+                    parry.Play();
                 }
             }
         }
@@ -426,15 +426,13 @@ public class GeneralPlayerControls : MonoBehaviour
                     boxCollider.GetComponent<Health>().takeDamage(1);
                 }
             }
-        }
 
-        if (collision.gameObject.name.Contains("KillZone")) SceneManager.LoadScene(1);
-
-        if (collision.gameObject.name.Contains("Door"))
-        {
-            collision.gameObject.GetComponent<DoorBrain>().CloseDoor();
-            StartCoroutine(DelayBeforeWin());
         }
+            if (collision.gameObject.name.Contains("Door"))
+            {
+                collision.gameObject.GetComponent<DoorBrain>().CloseDoor();
+                StartCoroutine(DelayBeforeWin());
+            }
        
     }
 
