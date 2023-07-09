@@ -14,6 +14,7 @@ public class EnemyMelee_IdleState : IdleState
     public override void Enter()
     {
         base.Enter();
+        Debug.Log("Idle");
     }
 
     public override void Exit()

@@ -37,6 +37,8 @@ public class MoveState : State
     public override void PhysicsUpdate()
     {
         base.PhysicsUpdate();
+
+        entity.SetVelocity(stateData.movementSpeed);
         isDetectingLedge = entity.CheckLedge();
         isDetectingWall = entity.CheckWall();
     }

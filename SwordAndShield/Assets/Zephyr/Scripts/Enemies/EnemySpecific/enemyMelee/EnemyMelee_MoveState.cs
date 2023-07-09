@@ -14,6 +14,7 @@ public class EnemyMelee_MoveState : MoveState
     public override void Enter()
     {
         base.Enter();
+        Debug.Log("Move");
     }
 
     public override void Exit()
