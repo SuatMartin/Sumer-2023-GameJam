@@ -19,18 +19,16 @@ public class PlayerSwitching : MonoBehaviour
     {
         PlayerMovement.enabled = true;
         player2Movement.enabled = false;
-        spawnPoint = new Vector3(player1.position.x, player1.position.y, player1.position.z);
-        player1Pos = new Vector3(player1.position.x, player1.position.y, player1.position.z);
-        player2Pos = new Vector3(player2.position.x, player2.position.y, player2.position.z);
+        spawnPoint = player1.position;
+        player1Pos = player1.position;
+        player2Pos = player2.position;
         players[1].SetActive(false);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.RightShift)){
-            switchPlayer();
-        }
+
     }
 
     public void switchPlayer(){

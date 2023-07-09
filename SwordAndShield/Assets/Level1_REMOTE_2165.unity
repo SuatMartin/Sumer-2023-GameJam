@@ -646,13 +646,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85bc12324c74a94438149fa6f90416a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-<<<<<<< HEAD
-=======
   attackCooldown: 1
   attackPower: 15
   attackDuration: 0.3
   isDashing: 0
->>>>>>> 2bbfb9468308c8ea10c7a1cb3156a438f0889024
   speed: 10
   jumpPower: 20
   groundLayer:
@@ -662,9 +659,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   coyoteTime: 0.25
-<<<<<<< HEAD
-  extraJumps: 1
-=======
   coyoteCounter: 0
   extraJumps: 1
   jumpCounter: 0
@@ -680,7 +674,6 @@ MonoBehaviour:
   parry: {fileID: 778411419}
   bash: {fileID: 0}
   dustHeight: 0.6
->>>>>>> 2bbfb9468308c8ea10c7a1cb3156a438f0889024
 --- !u!1 &488975465
 GameObject:
   m_ObjectHideFlags: 0
@@ -1407,42 +1400,6 @@ VisualEffect:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 778411416}
   m_Enabled: 1
-<<<<<<< HEAD
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b0caf8d3a808b2b47938457eff3845b9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 10
-  jumpPower: 20
-  groundLayer:
-    serializedVersion: 2
-    m_Bits: 64
-  wallLayer:
-    serializedVersion: 2
-    m_Bits: 128
-  attackCooldown: 1
-  attackPower: 15
-  attackDuration: 0.15
-  isDashing: 0
-  coyoteTime: 0.25
-  extraJumps: 1
---- !u!114 &751657737
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 751657730}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e3055080cd76b0c498c0715b0963582e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  startingHealth: 3
-  iFramesDuration: 2
-  numberOfFlashes: 3
-  components: []
-=======
   m_Asset: {fileID: 8926484042661614526, guid: 85a0b7487946c07448bf555b6da99160, type: 3}
   m_InitialEventName: OnPlay
   m_InitialEventNameOverriden: 0
@@ -1472,7 +1429,6 @@ MonoBehaviour:
       m_Array: []
     m_Bool:
       m_Array: []
->>>>>>> 2bbfb9468308c8ea10c7a1cb3156a438f0889024
 --- !u!1 &936506091
 GameObject:
   m_ObjectHideFlags: 0
@@ -1911,31 +1867,7 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
-<<<<<<< HEAD
---- !u!114 &1391400098
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1391400097}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 052bc56981d41b248b84e69bd4a3f7de, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  PlayerMovement: {fileID: 751657736}
-  player2Movement: {fileID: 427236533}
-  player1: {fileID: 751657735}
-  player2: {fileID: 427236532}
-  player1Active: 1
-  players:
-  - {fileID: 751657730}
-  - {fileID: 427236525}
---- !u!4 &1391400099
-=======
 --- !u!4 &1539212624
->>>>>>> 2bbfb9468308c8ea10c7a1cb3156a438f0889024
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
