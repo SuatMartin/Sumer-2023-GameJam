@@ -8,10 +8,6 @@ public class EnemyMelee : Entity
     public EnemyMelee_MoveState moveState { get; private set; }
     public EnemyMelee_PlayerDetectedState playerDetectedState { get; private set; }
 
-    //TEMPORARY
-    [SerializeField]
-    protected Projectile arrow;
-
     [SerializeField]
     private D_IdleState idleStateData;
     [SerializeField]
@@ -28,17 +24,5 @@ public class EnemyMelee : Entity
         playerDetectedState = new EnemyMelee_PlayerDetectedState(this, stateMachine, playerDetectedStateData, this);
 
         stateMachine.Initialize(moveState);
-    }
-
-    //TEMPORARY
-    public void FireArrow()
-    {
-        Projectile newArrow = Instantiate(arrow);
-        newArrow.transform.position = wallCheck.transform.position;
-
-        if(facingDirection == -1)
-        {
-            newArrow.Flip();
-        }
     }
 }
