@@ -101,6 +101,11 @@ public class GeneralPlayerControls : MonoBehaviour
 
     public void GetMovement()
     {
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            AudioManager.instance
+        }
+
         if (dead)
         {
             return;
