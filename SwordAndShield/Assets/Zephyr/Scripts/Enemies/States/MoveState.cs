@@ -10,7 +10,7 @@ public class MoveState : State
     protected bool isDetectingLedge;
     protected bool isPlayerInMinAgroRange;
     
-    public MoveState(Entity entity, FiniteStateMachine stateMachine, string animName, D_MoveState stateData) : base(entity, stateMachine, animName)
+    public MoveState(Entity entity, FiniteStateMachine stateMachine, D_MoveState stateData) : base(entity, stateMachine)
     {
         this.stateData = stateData;
     }

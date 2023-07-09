@@ -6,7 +6,7 @@ public class EnemyMelee_MoveState : MoveState
 {
     private EnemyMelee enemy;
     
-    public EnemyMelee_MoveState(Entity entity, FiniteStateMachine stateMachine, string animName, D_MoveState stateData, EnemyMelee enemy) : base(entity, stateMachine, animName, stateData)
+    public EnemyMelee_MoveState(Entity entity, FiniteStateMachine stateMachine, D_MoveState stateData, EnemyMelee enemy) : base(entity, stateMachine, stateData)
     {
         this.enemy = enemy;
     }
@@ -14,7 +14,7 @@ public class EnemyMelee_MoveState : MoveState
     public override void Enter()
     {
         base.Enter();
-        Debug.Log("Move");
+        //Debug.Log("Move");
     }
 
     public override void Exit()
@@ -24,7 +24,7 @@ public class EnemyMelee_MoveState : MoveState
 
     public override void LogicUpdate()
     {
-        //enemy.anim.Play("WalkEnemy");
+        enemy.anim.Play("WalkEnemy");
 
         base.LogicUpdate();
 

@@ -5,8 +5,9 @@ using UnityEngine;
 public class EnemyMelee_PlayerDetectedState : PlayerDetectedState
 {
     private EnemyMelee enemy;
+    float fireTimer;
 
-    public EnemyMelee_PlayerDetectedState(Entity entity, FiniteStateMachine stateMachine, string animName, D_PlayerDetectedState stateData, EnemyMelee enemy) : base(entity, stateMachine, animName, stateData)
+    public EnemyMelee_PlayerDetectedState(Entity entity, FiniteStateMachine stateMachine, D_PlayerDetectedState stateData, EnemyMelee enemy) : base(entity, stateMachine, stateData)
     {
         this.enemy = enemy;
     }
@@ -24,17 +25,19 @@ public class EnemyMelee_PlayerDetectedState : PlayerDetectedState
 
     public override void LogicUpdate()
     {
+        Debug.Log("logic update");
+
         base.LogicUpdate();
 
         if (!isPlayerInMaxAgroRange)
         {
-            //enemy.idleState.SetFlipAfterIdle(false);
+            enemy.idleState.SetFlipAfterIdle(false);
             stateMachine.ChangeState(enemy.idleState);
         }
 
-        enemy.fireTimer -= Time.deltaTime;
+        fireTimer -= Time.deltaTime;
 
-        if (enemy.fireTimer < 0)
+        if (fireTimer < 0)
         {
             Fire();
         }
@@ -42,9 +45,8 @@ public class EnemyMelee_PlayerDetectedState : PlayerDetectedState
 
     void Fire()
     {
-        enemy.fireTimer = Random.RandomRange(1f, 3f);
-        enemy.FireArrow();
-        enemy.animator.Play("ShootEnemy");
+        fireTimer = Random.RandomRange(1f, 3f);
+        enemy.FireArrow();    
     }
 
     public override void PhysicsUpdate()

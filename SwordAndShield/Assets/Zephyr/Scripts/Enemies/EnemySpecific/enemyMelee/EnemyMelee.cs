@@ -5,6 +5,7 @@ using UnityEngine;
 public class EnemyMelee : Entity
 {
     public EnemyMelee_IdleState idleState { get; private set; }
+    public EnemyMelee_MoveState moveState { get; private set; }
     public EnemyMelee_PlayerDetectedState playerDetectedState { get; private set; }
 
     //TEMPORARY
@@ -14,25 +15,27 @@ public class EnemyMelee : Entity
     [SerializeField]
     private D_IdleState idleStateData;
     [SerializeField]
+    private D_MoveState moveStateData;
+    [SerializeField]
     private D_PlayerDetectedState playerDetectedStateData;
 
-    public float fireTimer { get; set; }
-    public float turnTimer { get; set; }
+    public Animator anim;
 
     public override void Start()
     {
         base.Start();
 
-        idleState = new EnemyMelee_IdleState(this, stateMachine, "IdleEnemy", idleStateData, this);
-        playerDetectedState = new EnemyMelee_PlayerDetectedState(this, stateMachine, "", playerDetectedStateData, this);
+        moveState = new EnemyMelee_MoveState(this, stateMachine, moveStateData, this);
+        idleState = new EnemyMelee_IdleState(this, stateMachine, idleStateData, this);
+        playerDetectedState = new EnemyMelee_PlayerDetectedState(this, stateMachine, playerDetectedStateData, this);
 
-        stateMachine.Initialize(idleState);
+        stateMachine.Initialize(moveState);
     }
 
     //TEMPORARY
     public void FireArrow()
     {
-        //anim.Play("ShootEnemy");
+        anim.Play("ShootEnemy");
 
         Projectile newArrow = Instantiate(arrow);
         newArrow.transform.position = wallCheck.transform.position;

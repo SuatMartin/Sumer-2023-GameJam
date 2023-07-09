@@ -405,6 +405,7 @@ public class GeneralPlayerControls : MonoBehaviour
 
         if (collision.transform.parent != null)
         {
+<<<<<<< HEAD
             if (collision.transform.parent.name.Contains("Arrow"))
             {
                 print("GETTTNIG IT BY ARROW");
@@ -426,6 +427,27 @@ public class GeneralPlayerControls : MonoBehaviour
                     boxCollider.GetComponent<Health>().takeDamage(1);
                 }
             }
+=======
+            print("GETTTNIG IT BY ARROW");
+            HitByArrow(collision.transform.parent.gameObject);
+        }
+
+        if (collision.gameObject.CompareTag("Enemy"))
+        {
+            if (isDashing)
+            {
+                print("I dashed into enemy");
+                bash.Play();
+                GameObject blood = Instantiate(bloodPrefab, collision.transform.position, Quaternion.identity);
+                Destroy(collision.transform.parent.gameObject);
+            }
+            else
+            {
+                print("I ran into enemy");
+                boxCollider.GetComponent<Health>().takeDamage(1);
+            }
+        }
+>>>>>>> parent of b0e9304 (archer fixed)
 
         }
             if (collision.gameObject.name.Contains("Door"))
@@ -442,8 +464,12 @@ public class GeneralPlayerControls : MonoBehaviour
         print("WINNING");
 
         yield return new WaitForSeconds(.5f);
+<<<<<<< HEAD
         
         winMenu.SetActive(true);
+=======
+        print("you win!");
+>>>>>>> parent of b0e9304 (archer fixed)
     }
 
     private void OnDrawGizmos()
