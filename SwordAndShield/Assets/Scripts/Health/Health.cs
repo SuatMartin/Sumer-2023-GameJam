@@ -30,7 +30,7 @@ public class Health : MonoBehaviour
         currentHealth = Mathf.Clamp(currentHealth - _damage, 0, startingHealth);
 
         if(currentHealth > 0){
-            anim.SetTrigger("hurt");
+            anim.SetTrigger("hurt"); // we need a hurt animation, but not relly we should just start the coroutine
             StartCoroutine(Invulnerability());
         } else {
             if(!dead){
@@ -40,6 +40,9 @@ public class Health : MonoBehaviour
                 anim.SetBool("grounded", true);
                 anim.SetTrigger("die");
                 dead = true;
+                print("YOU DIED");
+                spriteRend.color = new Color(1, 0, 0, 0.5f);
+                GetComponent<GeneralPlayerControls>().Dead();
             }
         }
     }
@@ -59,7 +62,8 @@ public class Health : MonoBehaviour
         }
     }
 
-    private IEnumerator Invulnerability(){
+    private IEnumerator Invulnerability(){ // so does this run?
+        print("INVICIBLE");
         invulnerable = true;
         Physics2D.IgnoreLayerCollision(8,9, true);
         for(int i = 0; i < numberOfFlashes; ++i){

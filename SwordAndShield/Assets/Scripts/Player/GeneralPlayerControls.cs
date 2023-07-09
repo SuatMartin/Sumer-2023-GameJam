@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.VFX;
+using UnityEngine.SceneManagement;
 
 public class GeneralPlayerControls : MonoBehaviour
 {
@@ -54,18 +55,30 @@ public class GeneralPlayerControls : MonoBehaviour
 
     public int keyCount;
 
-    // Start is called before the first frame update
+    private Health health;
+
+    public bool dead;
+
+    // THINGS TO DO:
+    // make door give you victory
+
+
     void Start()
     {
         body = GetComponent<Rigidbody2D>();
         boxCollider = GetComponent<BoxCollider2D>();
         anim = GetComponent<Animator>();
+        health = GetComponent<Health>();
     }
 
     // Update is called once per frame
     void Update()
     {
         GetMovement();
+        if (Input.GetKeyDown(KeyCode.H))
+        {
+            health.takeDamage(1);
+        }
     }
 
     public void GetKey()
@@ -73,12 +86,29 @@ public class GeneralPlayerControls : MonoBehaviour
         keyCount++;
     }
     
+    public void Dead()
+    {
+        StartCoroutine(DelayBeforeRestart());
+        transform.Rotate(Vector3.forward, 90f);
+        dead = true;
+    }
+
+    IEnumerator DelayBeforeRestart()
+    {
+        yield return new WaitForSeconds(1f);
+        SceneManager.LoadScene(0);
+    }
+
     public void GetMovement()
     {
+        if (dead)
+        {
+            return;
+        }
 
         if (isDashing) return;
 
-        print(isDashing + " " + isParrying);
+       // print(isDashing + " " + isParrying);
         
         grounded = isGrounded();
 
@@ -262,7 +292,7 @@ public class GeneralPlayerControls : MonoBehaviour
         anim.Play("Dash");
 
         canDash = false;
-        isDashing = true;
+        isDashing = true; // damaging is dashing
         damaging = true;
         float originalGravity = body.gravityScale;
         body.gravityScale = 0f;
@@ -343,17 +373,32 @@ public class GeneralPlayerControls : MonoBehaviour
             HitByArrow(collision.gameObject);
         }
 
-        if (collision.tag == "Enemy")
+        if (collision.name.Contains("Square"))
         {
-            if (damaging)
+            if (isDashing)
             {
-                collision.GetComponent<Health>().takeDamage(1);
+                print("I dashed into enemy");
+                bash.Play();
+                collision.GetComponent<Health>().takeDamage(1); // this will work as long as enemies have health but lowkey I can just make it explode and kill the enemy on my end too
             }
             else
             {
+                print("I ran into enemy");
                 boxCollider.GetComponent<Health>().takeDamage(1);
             }
         }
+
+        if (collision.name.Contains("Door"))
+        {
+            collision.GetComponent<DoorBrain>().CloseDoor();
+            StartCoroutine(DelayBeforeWin());
+        }
+    }
+
+    IEnumerator DelayBeforeWin()
+    {
+        yield return new WaitForSeconds(.5f);
+        print("you win!");
     }
 
     private void OnDrawGizmos()
