@@ -406,6 +406,7 @@ public class GeneralPlayerControls : MonoBehaviour
         if (collision.transform.parent != null)
         {
 <<<<<<< HEAD
+<<<<<<< HEAD
             if (collision.transform.parent.name.Contains("Arrow"))
             {
                 print("GETTTNIG IT BY ARROW");
@@ -428,6 +429,8 @@ public class GeneralPlayerControls : MonoBehaviour
                 }
             }
 =======
+=======
+>>>>>>> parent of b0e9304 (archer fixed)
             print("GETTTNIG IT BY ARROW");
             HitByArrow(collision.transform.parent.gameObject);
         }
@@ -465,8 +468,12 @@ public class GeneralPlayerControls : MonoBehaviour
 
         yield return new WaitForSeconds(.5f);
 <<<<<<< HEAD
+<<<<<<< HEAD
         
         winMenu.SetActive(true);
+=======
+        print("you win!");
+>>>>>>> parent of b0e9304 (archer fixed)
 =======
         print("you win!");
 >>>>>>> parent of b0e9304 (archer fixed)
