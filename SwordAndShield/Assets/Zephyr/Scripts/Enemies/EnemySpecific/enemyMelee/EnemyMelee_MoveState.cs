@@ -26,7 +26,11 @@ public class EnemyMelee_MoveState : MoveState
     {
         base.LogicUpdate();
 
-        if(isDetectingWall || isDetectingLedge)
+        if (isPlayerInMinAgroRange)
+        {
+            stateMachine.ChangeState(enemy.playerDetectedState);
+        }
+        else if(isDetectingWall || isDetectingLedge)
         {
             enemy.idleState.SetFlipAfterIdle(true);
             stateMachine.ChangeState(enemy.idleState);

@@ -18,6 +18,7 @@ public class PlayerDetectedState : State
     {
         base.Enter();
 
+        entity.SetVelocity(0f);
         isPlayerInMaxAgroRange = entity.CheckPlayerInMaxAgroRange();
         isPlayerInMinAgroRange = entity.CheckPlayerInMinAgroRange();
     }

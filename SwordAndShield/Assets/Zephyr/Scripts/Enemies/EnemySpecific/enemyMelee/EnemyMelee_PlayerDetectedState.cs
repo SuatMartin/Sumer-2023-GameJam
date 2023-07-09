@@ -14,6 +14,7 @@ public class EnemyMelee_PlayerDetectedState : PlayerDetectedState
     public override void Enter()
     {
         base.Enter();
+        Debug.Log("PlayerDetected");
     }
 
     public override void Exit()
@@ -24,6 +25,12 @@ public class EnemyMelee_PlayerDetectedState : PlayerDetectedState
     public override void LogicUpdate()
     {
         base.LogicUpdate();
+
+        if (!isPlayerInMaxAgroRange)
+        {
+            enemy.idleState.SetFlipAfterIdle(false);
+            stateMachine.ChangeState(enemy.idleState);
+        }
     }
 
     public override void PhysicsUpdate()
