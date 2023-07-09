@@ -2,15 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MoveState : State
+public class PlayerDetectedState : State
 {
-    protected D_MoveState stateData;
+    protected D_PlayerDetectedState stateData;
 
-    protected bool isDetectingWall;
-    protected bool isDetectingLedge;
     protected bool isPlayerInMinAgroRange;
+    protected bool isPlayerInMaxAgroRange;
     
-    public MoveState(Entity entity, FiniteStateMachine stateMachine, D_MoveState stateData) : base(entity, stateMachine)
+    public PlayerDetectedState(Entity entity, FiniteStateMachine stateMachine, D_PlayerDetectedState stateData) : base(entity, stateMachine)
     {
         this.stateData = stateData;
     }
@@ -18,10 +17,8 @@ public class MoveState : State
     public override void Enter()
     {
         base.Enter();
-        entity.SetVelocity(stateData.movementSpeed);
 
-        isDetectingLedge = entity.CheckLedge();
-        isDetectingWall = entity.CheckWall();
+        isPlayerInMaxAgroRange = entity.CheckPlayerInMaxAgroRange();
         isPlayerInMinAgroRange = entity.CheckPlayerInMinAgroRange();
     }
 
@@ -39,9 +36,7 @@ public class MoveState : State
     {
         base.PhysicsUpdate();
 
-        entity.SetVelocity(stateData.movementSpeed);
-        isDetectingLedge = entity.CheckLedge();
-        isDetectingWall = entity.CheckWall();
+        isPlayerInMaxAgroRange = entity.CheckPlayerInMaxAgroRange();
         isPlayerInMinAgroRange = entity.CheckPlayerInMinAgroRange();
     }
 }
