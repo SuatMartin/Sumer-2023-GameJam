@@ -34,6 +34,7 @@ public class Entity : MonoBehaviour
 
     public virtual void Update()
     {
+        // HERE
         stateMachine.currentState.LogicUpdate();
     }
 

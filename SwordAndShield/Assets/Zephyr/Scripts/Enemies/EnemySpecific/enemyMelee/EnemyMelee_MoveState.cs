@@ -14,7 +14,7 @@ public class EnemyMelee_MoveState : MoveState
     public override void Enter()
     {
         base.Enter();
-        Debug.Log("Move");
+        //Debug.Log("Move");
     }
 
     public override void Exit()
@@ -24,6 +24,8 @@ public class EnemyMelee_MoveState : MoveState
 
     public override void LogicUpdate()
     {
+        enemy.anim.Play("WalkEnemy");
+
         base.LogicUpdate();
 
         if (isPlayerInMinAgroRange)

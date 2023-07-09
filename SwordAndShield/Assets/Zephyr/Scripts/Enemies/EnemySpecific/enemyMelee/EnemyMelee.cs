@@ -19,6 +19,8 @@ public class EnemyMelee : Entity
     [SerializeField]
     private D_PlayerDetectedState playerDetectedStateData;
 
+    public Animator anim;
+
     public override void Start()
     {
         base.Start();
@@ -33,6 +35,8 @@ public class EnemyMelee : Entity
     //TEMPORARY
     public void FireArrow()
     {
+        anim.Play("ShootEnemy");
+
         Projectile newArrow = Instantiate(arrow);
         newArrow.transform.position = wallCheck.transform.position;
 

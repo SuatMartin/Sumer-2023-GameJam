@@ -59,6 +59,8 @@ public class GeneralPlayerControls : MonoBehaviour
 
     public bool dead;
 
+    public GameObject bloodPrefab;
+
     // THINGS TO DO:
     // make door give you victory
 
@@ -103,7 +105,7 @@ public class GeneralPlayerControls : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            AudioManager.instance
+            //
         }
 
         if (dead)
@@ -123,12 +125,12 @@ public class GeneralPlayerControls : MonoBehaviour
         {
             if (!isParrying) SetAnimState("run");
 
-            print("move right?");
+            //print("move right?");
             transform.localScale = new Vector3(4, 4, 1);
         }
         else if (horizontalInput < -.01f)
         {
-            print("move left?>");
+            //print("move left?>");
             if (!isParrying) SetAnimState("run");
             transform.localScale = new Vector3(-4, 4, 1);
         }
@@ -143,6 +145,7 @@ public class GeneralPlayerControls : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
+            print("JUMP!");
             Jump();
         }
 
@@ -177,7 +180,7 @@ public class GeneralPlayerControls : MonoBehaviour
 
         if (!prevGrounded && grounded)
         {
-            print("I just landed");
+            //print("I just landed");
             Land();
         }
 
@@ -209,19 +212,19 @@ public class GeneralPlayerControls : MonoBehaviour
 
     public void switchPlayer()
     {
-        print("SWAP CHARACTERS");
+        //print("SWAP CHARACTERS");
         // depending on teh state switch to the other approprirate state
 
         if (isSword)
         {
             if (grounded)
             {
-                print("1");
+                //print("1");
                 anim.Play("IdleShield");
             }
             else
             {
-                print("2");
+                //print("2");
                 anim.Play("JumpShield");
             }
         }
@@ -229,7 +232,7 @@ public class GeneralPlayerControls : MonoBehaviour
         {
             if (grounded)
             {
-                print("3");
+                //print("3");
                 anim.Play("IdleSword");
             }
             else {
@@ -244,7 +247,7 @@ public class GeneralPlayerControls : MonoBehaviour
 
     IEnumerator Parry()
     {
-        print("parry");
+        //print("parry");
         anim.Play("Parry");
 
         isParrying = true;
@@ -259,15 +262,15 @@ public class GeneralPlayerControls : MonoBehaviour
                 // if hit arrow, make arrow flip away
                 if (!collider.name.Contains("Player"))
                 {
-                    if (collider.name.Contains("arrow")) // this is placeholder
+                    if (collider.transform.parent.name.Contains("Arrow")) // this is placeholder
                     {
                         print("I HIT AN ARROW");
 
                         // make arrow flip away
-                        //collider.gameObject.GetComponent<Projectile>().FlipOut();
+                        collider.transform.parent.gameObject.GetComponent<Projectile>().Flip();
                     }
                     // Do something with the collider, e.g., access its GameObject or apply some logic
-                    Debug.Log("Collision detected with: " + collider.gameObject.name);
+                    //Debug.Log("Collision detected with: " + collider.gameObject.name);
 
                     parry.Play();
                 }
@@ -282,14 +285,15 @@ public class GeneralPlayerControls : MonoBehaviour
 
     void HitByArrow(GameObject arrow)
     {
-        //arrow.GetComponent<Projectile>().Kill();
-
+        print("arrow!!!!!!");
+        arrow.GetComponent<Projectile>().Kill();
         LoseHealth();
     }
 
     void LoseHealth()
     {
         // send message to UI things
+        boxCollider.GetComponent<Health>().takeDamage(1);
     }
 
     private IEnumerator Dash()
@@ -312,11 +316,13 @@ public class GeneralPlayerControls : MonoBehaviour
 
     private void Jump()
     {
-        print(jumpCounter);
+        print(isGrounded());
         if (coyoteCounter < 0 && jumpCounter <= 0) { return; }
         //SoundManager.instance.PlaySound(jumpSound);
         if (isGrounded())
         {
+            print("I am grounded and jumping");
+
             if (isSword) anim.Play("JumpSword");
             else anim.Play("JumpShield");
             body.velocity = new Vector2(body.velocity.x, jumpPower);
@@ -371,20 +377,24 @@ public class GeneralPlayerControls : MonoBehaviour
         return raycastHit.collider != null;
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.name.Contains("arrow"))
+        //print("colliding");
+
+        if (collision.transform.parent.name.Contains("Arrow"))
         {
-            HitByArrow(collision.gameObject);
+            print("GETTTNIG IT BY ARROW");
+            HitByArrow(collision.transform.parent.gameObject);
         }
 
-        if (collision.name.Contains("Square"))
+        if (collision.gameObject.CompareTag("Enemy"))
         {
             if (isDashing)
             {
                 print("I dashed into enemy");
                 bash.Play();
-                collision.GetComponent<Health>().takeDamage(1); // this will work as long as enemies have health but lowkey I can just make it explode and kill the enemy on my end too
+                GameObject blood = Instantiate(bloodPrefab, collision.transform.position, Quaternion.identity);
+                Destroy(collision.transform.parent.gameObject);
             }
             else
             {
@@ -393,12 +403,13 @@ public class GeneralPlayerControls : MonoBehaviour
             }
         }
 
-        if (collision.name.Contains("Door"))
+        if (collision.gameObject.name.Contains("Door"))
         {
-            collision.GetComponent<DoorBrain>().CloseDoor();
+            collision.gameObject.GetComponent<DoorBrain>().CloseDoor();
             StartCoroutine(DelayBeforeWin());
         }
     }
+
 
     IEnumerator DelayBeforeWin()
     {

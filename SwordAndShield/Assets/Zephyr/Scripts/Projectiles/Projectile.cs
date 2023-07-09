@@ -33,13 +33,20 @@ public class Projectile : MonoBehaviour
 
     public virtual void SetVelocity(float velocity)
     {
+        facingDirection = -1;
+        if (transform.localScale.x < 0) facingDirection = 1;
+        
         velocityWorkspace.Set(facingDirection * velocity, rb.velocity.y);
         rb.velocity = velocityWorkspace;
+
+        //print(rb.velocity + " " + velocityWorkspace + " " + facingDirection + "  " + velocity + " VELOCITY STUFF");
     }
 
     public virtual void Flip()
     {
+        /*
         facingDirection *= -1;
         aliveGO.transform.Rotate(0f, 180f, 0f);
+        */
     }
 }

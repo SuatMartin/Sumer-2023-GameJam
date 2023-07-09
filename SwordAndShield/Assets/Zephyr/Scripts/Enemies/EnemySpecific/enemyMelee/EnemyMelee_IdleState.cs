@@ -14,7 +14,7 @@ public class EnemyMelee_IdleState : IdleState
     public override void Enter()
     {
         base.Enter();
-        Debug.Log("Idle");
+        //Debug.Log("Idle");
     }
 
     public override void Exit()
@@ -25,6 +25,8 @@ public class EnemyMelee_IdleState : IdleState
     public override void LogicUpdate()
     {
         base.LogicUpdate();
+
+        enemy.anim.Play("IdleEnemy");
 
         if (isPlayerInMinAgroRange)
         {
