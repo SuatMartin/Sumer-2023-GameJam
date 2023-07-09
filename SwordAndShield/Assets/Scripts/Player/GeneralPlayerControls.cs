@@ -61,10 +61,10 @@ public class GeneralPlayerControls : MonoBehaviour
 
     public GameObject bloodPrefab;
 
-    // THINGS TO DO:
-    // make door give you victory
+    public GameObject pauseMenu;
+    public bool paused;
 
-
+    public GameObject winMenu;
     void Start()
     {
         body = GetComponent<Rigidbody2D>();
@@ -77,9 +77,31 @@ public class GeneralPlayerControls : MonoBehaviour
     void Update()
     {
         GetMovement();
-        if (Input.GetKeyDown(KeyCode.H))
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
-            health.takeDamage(1);
+            PauseGame();
+        }
+
+        /*
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            StartCoroutine(DelayBeforeWin());
+        }
+        */
+    }
+
+    void PauseGame()
+    {
+        if (!paused) {
+            Time.timeScale = 0;
+            pauseMenu.SetActive(true);
+            paused = true;
+                }
+        else
+        {
+            Time.timeScale = 1;
+            pauseMenu.SetActive(false);
+            paused = false;
         }
     }
 
@@ -414,7 +436,8 @@ public class GeneralPlayerControls : MonoBehaviour
     IEnumerator DelayBeforeWin()
     {
         yield return new WaitForSeconds(.5f);
-        print("you win!");
+
+        winMenu.SetActive(true);
     }
 
     private void OnDrawGizmos()

@@ -26,6 +26,6 @@ public class PauseScript : MonoBehaviour
 
     public void Quit()
     {
-        //SceneManager.LoadScene();
+        SceneManager.LoadScene(0);
     }
 }
