@@ -13,7 +13,8 @@ public class Entity : MonoBehaviour
     public GameObject aliveGO { get; private set; }
 
     [SerializeField]
-    private Transform wallCheck;
+    //TEMPORARY - set from private to protected
+    protected Transform wallCheck;
     [SerializeField]
     private Transform ledgeCheck;
     [SerializeField]

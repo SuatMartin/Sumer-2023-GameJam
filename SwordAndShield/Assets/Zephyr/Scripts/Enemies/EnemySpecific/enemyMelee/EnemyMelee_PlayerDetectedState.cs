@@ -31,6 +31,8 @@ public class EnemyMelee_PlayerDetectedState : PlayerDetectedState
             enemy.idleState.SetFlipAfterIdle(false);
             stateMachine.ChangeState(enemy.idleState);
         }
+
+        enemy.FireArrow();
     }
 
     public override void PhysicsUpdate()
