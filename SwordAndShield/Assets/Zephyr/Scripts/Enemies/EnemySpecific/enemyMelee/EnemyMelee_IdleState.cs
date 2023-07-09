@@ -6,7 +6,7 @@ public class EnemyMelee_IdleState : IdleState
 {
     private EnemyMelee enemy;
     
-    public EnemyMelee_IdleState(Entity entity, FiniteStateMachine stateMachine, D_IdleState stateData, EnemyMelee enemy) : base(entity, stateMachine, stateData)
+    public EnemyMelee_IdleState(Entity entity, FiniteStateMachine stateMachine, string animName, D_IdleState stateData, EnemyMelee enemy) : base(entity, stateMachine, animName, stateData)
     {
         this.enemy = enemy;
     }
@@ -14,7 +14,8 @@ public class EnemyMelee_IdleState : IdleState
     public override void Enter()
     {
         base.Enter();
-        //Debug.Log("Idle");
+        Debug.Log("Idle");
+        enemy.turnTimer = Random.RandomRange(1f, 3f);
     }
 
     public override void Exit()
@@ -28,14 +29,20 @@ public class EnemyMelee_IdleState : IdleState
 
         //enemy.anim.Play("IdleEnemy");
 
+        enemy.turnTimer -= Time.deltaTime;
+
         if (isPlayerInMinAgroRange)
         {
             stateMachine.ChangeState(enemy.playerDetectedState);
         }
-        else if (isIdleTimeOver)
+
+        if(enemy.turnTimer < 0)
         {
-            stateMachine.ChangeState(enemy.moveState);
+            enemy.Flip();
+            enemy.turnTimer = Random.RandomRange(1f, 3f);
         }
+
+        Debug.Log(enemy.turnTimer);
     }
 
     public override void PhysicsUpdate()
