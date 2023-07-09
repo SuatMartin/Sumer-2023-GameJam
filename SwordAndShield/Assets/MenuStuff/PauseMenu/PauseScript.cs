@@ -21,6 +21,7 @@ public class PauseScript : MonoBehaviour
 
     public void Resume()
     {
+        Time.timeScale = 1;
         pauseScreen.SetActive(false);
     }
 

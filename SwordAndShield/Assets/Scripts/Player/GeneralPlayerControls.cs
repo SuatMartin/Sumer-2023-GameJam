@@ -403,40 +403,46 @@ public class GeneralPlayerControls : MonoBehaviour
     {
         //print("colliding");
 
-        if (collision.transform.parent.name.Contains("Arrow"))
+        if (collision.transform.parent != null)
         {
-            print("GETTTNIG IT BY ARROW");
-            HitByArrow(collision.transform.parent.gameObject);
-        }
-
-        if (collision.gameObject.CompareTag("Enemy"))
-        {
-            if (isDashing)
+            if (collision.transform.parent.name.Contains("Arrow"))
             {
-                print("I dashed into enemy");
-                bash.Play();
-                GameObject blood = Instantiate(bloodPrefab, collision.transform.position, Quaternion.identity);
-                Destroy(collision.transform.parent.gameObject);
+                print("GETTTNIG IT BY ARROW");
+                HitByArrow(collision.transform.parent.gameObject);
             }
-            else
-            {
-                print("I ran into enemy");
-                boxCollider.GetComponent<Health>().takeDamage(1);
-            }
-        }
 
-        if (collision.gameObject.name.Contains("Door"))
-        {
-            collision.gameObject.GetComponent<DoorBrain>().CloseDoor();
-            StartCoroutine(DelayBeforeWin());
+            if (collision.gameObject.CompareTag("Enemy"))
+            {
+                if (isDashing)
+                {
+                    print("I dashed into enemy");
+                    bash.Play();
+                    GameObject blood = Instantiate(bloodPrefab, collision.transform.position, Quaternion.identity);
+                    Destroy(collision.transform.parent.gameObject);
+                }
+                else
+                {
+                    print("I ran into enemy");
+                    boxCollider.GetComponent<Health>().takeDamage(1);
+                }
+            }
+
         }
+            if (collision.gameObject.name.Contains("Door"))
+            {
+                collision.gameObject.GetComponent<DoorBrain>().CloseDoor();
+                StartCoroutine(DelayBeforeWin());
+            }
+       
     }
 
 
     IEnumerator DelayBeforeWin()
     {
-        yield return new WaitForSeconds(.5f);
+        print("WINNING");
 
+        yield return new WaitForSeconds(.5f);
+        
         winMenu.SetActive(true);
     }
 
