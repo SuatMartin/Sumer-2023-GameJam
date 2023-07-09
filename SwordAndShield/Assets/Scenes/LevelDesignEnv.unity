@@ -1853,7 +1853,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1225536975}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 17e62a0a9ef09b042b487f8c8387c1a4, type: 2}
   m_CullingMode: 0
@@ -27257,15 +27257,27 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 3559411073156831378, guid: 6184e6bc3f9e670469be39c6dedf6dd4, type: 3}
+      propertyPath: m_LocalScale.x
+      value: -4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3559411073156831378, guid: 6184e6bc3f9e670469be39c6dedf6dd4, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.11
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3559411073156831381, guid: 6184e6bc3f9e670469be39c6dedf6dd4, type: 3}
       propertyPath: m_Size.y
       value: 0.33
       objectReference: {fileID: 0}
+    - target: {fileID: 3559411073156831381, guid: 6184e6bc3f9e670469be39c6dedf6dd4, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3559411074223880192, guid: 6184e6bc3f9e670469be39c6dedf6dd4, type: 3}
       propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3559411074223880192, guid: 6184e6bc3f9e670469be39c6dedf6dd4, type: 3}
+      propertyPath: m_LocalScale.x
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3559411074223880192, guid: 6184e6bc3f9e670469be39c6dedf6dd4, type: 3}

@@ -26,7 +26,7 @@ public class EnemyMelee_IdleState : IdleState
     {
         base.LogicUpdate();
 
-        enemy.anim.Play("IdleEnemy");
+        //enemy.anim.Play("IdleEnemy");
 
         if (isPlayerInMinAgroRange)
         {

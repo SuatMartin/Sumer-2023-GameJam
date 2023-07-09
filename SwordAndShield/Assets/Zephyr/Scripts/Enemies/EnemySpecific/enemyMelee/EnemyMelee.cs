@@ -35,7 +35,7 @@ public class EnemyMelee : Entity
     //TEMPORARY
     public void FireArrow()
     {
-        anim.Play("ShootEnemy");
+        //anim.Play("ShootEnemy");
 
         Projectile newArrow = Instantiate(arrow);
         newArrow.transform.position = wallCheck.transform.position;

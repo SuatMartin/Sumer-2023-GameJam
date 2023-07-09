@@ -24,7 +24,9 @@ public class EnemyMelee_MoveState : MoveState
 
     public override void LogicUpdate()
     {
-        enemy.anim.Play("WalkEnemy");
+        //enemy.anim.Play("WalkEnemy");
+
+        Debug.Log(enemy.transform.position + " " + enemy.name);
 
         base.LogicUpdate();
 
