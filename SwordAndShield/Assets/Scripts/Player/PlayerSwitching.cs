@@ -28,9 +28,7 @@ public class PlayerSwitching : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.RightShift)){
-            switchPlayer();
-        }
+
     }
 
     public void switchPlayer(){
