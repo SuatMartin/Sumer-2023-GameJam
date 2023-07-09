@@ -50,6 +50,10 @@ public class GeneralPlayerControls : MonoBehaviour
 
     public float dustHeight;
 
+    bool isParrying;
+
+    public int keyCount;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -64,22 +68,41 @@ public class GeneralPlayerControls : MonoBehaviour
         GetMovement();
     }
 
+    public void GetKey()
+    {
+        keyCount++;
+    }
+    
     public void GetMovement()
     {
+
         if (isDashing) return;
 
+        print(isDashing + " " + isParrying);
+        
         grounded = isGrounded();
 
         horizontalInput = Input.GetAxis("Horizontal");
         //Flip Player walking
         if (horizontalInput > .01f)
         {
+            if (!isParrying) SetAnimState("run");
+
+            print("move right?");
             transform.localScale = new Vector3(4, 4, 1);
         }
         else if (horizontalInput < -.01f)
         {
+            print("move left?>");
+            if (!isParrying) SetAnimState("run");
             transform.localScale = new Vector3(-4, 4, 1);
         }
+        else
+        {
+            if (!isParrying) SetAnimState("idle");
+        }
+
+        if (isParrying) return;
 
         //Set animator parameters
 
@@ -108,16 +131,8 @@ public class GeneralPlayerControls : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0))  // && canAttack()
         {
-            print("hello?");
-            if (isSword) Parry();
+            if (isSword) StartCoroutine(Parry());
             else StartCoroutine(Dash());
-        }
-
-
-
-        if (Input.GetMouseButtonDown(0) && canDash)  // && canAttack()
-        {
-            StartCoroutine(Dash());
         }
 
         if (Input.GetKeyDown(KeyCode.LeftShift))
@@ -134,6 +149,29 @@ public class GeneralPlayerControls : MonoBehaviour
         prevGrounded = grounded;
     }
 
+    public void SetAnimState(string state)
+    {
+        switch (state)
+        {
+            case "idle":
+                if (isSword) anim.Play("IdleSword");
+                else anim.Play("IdleShield");
+                break;
+            case "jump":
+                if (isSword) anim.Play("JumpSword");
+                else anim.Play("JumpShield");
+                break;
+            case "run":
+                if (isSword) anim.Play("RunSword");
+                else anim.Play("RunShield");
+                break;
+            case "attack":
+                if (isSword) anim.Play("Parry");
+                else anim.Play("Dash");
+                break;
+        }
+    }
+
     public void switchPlayer()
     {
         print("SWAP CHARACTERS");
@@ -146,7 +184,6 @@ public class GeneralPlayerControls : MonoBehaviour
                 print("1");
                 anim.Play("IdleShield");
             }
-
             else
             {
                 print("2");
@@ -170,9 +207,12 @@ public class GeneralPlayerControls : MonoBehaviour
     }
 
 
-    void Parry()
+    IEnumerator Parry()
     {
+        print("parry");
         anim.Play("Parry");
+
+        isParrying = true;
 
         Collider2D[] colliders = Physics2D.OverlapBoxAll(parryPoint.position, boxSize, 0f);
 
@@ -182,20 +222,39 @@ public class GeneralPlayerControls : MonoBehaviour
             foreach (Collider2D collider in colliders)
             {
                 // if hit arrow, make arrow flip away
-
-                if (collider.name.Contains("arrow")) // this is placeholder
+                if (!collider.name.Contains("Player"))
                 {
-                    print("I HIT AN ARROW");
+                    if (collider.name.Contains("arrow")) // this is placeholder
+                    {
+                        print("I HIT AN ARROW");
 
-                    // make arrow flip away
+                        // make arrow flip away
+                        //collider.gameObject.GetComponent<Projectile>().FlipOut();
+                    }
+                    // Do something with the collider, e.g., access its GameObject or apply some logic
+                    Debug.Log("Collision detected with: " + collider.gameObject.name);
+
+                    parry.Play();
                 }
-
-                // Do something with the collider, e.g., access its GameObject or apply some logic
-                Debug.Log("Collision detected with: " + collider.gameObject.name);
-
-                parry.Play();
             }
         }
+
+        yield return new WaitForSeconds(.5f);
+
+        isParrying = false;
+        
+    }
+
+    void HitByArrow(GameObject arrow)
+    {
+        //arrow.GetComponent<Projectile>().Kill();
+
+        LoseHealth();
+    }
+
+    void LoseHealth()
+    {
+        // send message to UI things
     }
 
     private IEnumerator Dash()
@@ -279,6 +338,11 @@ public class GeneralPlayerControls : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if (collision.gameObject.name.Contains("arrow"))
+        {
+            HitByArrow(collision.gameObject);
+        }
+
         if (collision.tag == "Enemy")
         {
             if (damaging)
